@@ -1,25 +1,27 @@
-import CartButton from "@/components/CartButton";
-import { images, offers } from "@/constants";
-import useAuthStore from "@/store/auth.store";
-import cn from "clsx";
+import cn from 'clsx';
 import { Fragment } from "react";
 import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import CartButton from "@/components/CartButton";
+import { images, offers } from "@/constants";
+import useAuthStore from "@/store/auth.store";
+
 export default function Index() {
   const { user } = useAuthStore();
-  console.log("useAuthStore",user);
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-
       <FlatList
         data={offers}
         renderItem={({ item, index }) => {
-          const isEven = index % 2 == 0;
+          const isEven = index % 2 === 0;
+
           return (
             <View>
-              <Pressable className={cn("offer-card", isEven ? 'flex-row-reverse' : 'flex-row')} style={{ backgroundColor: item.color }}
+              <Pressable
+                className={cn("offer-card", isEven ? 'flex-row-reverse' : 'flex-row')}
+                style={{ backgroundColor: item.color }}
                 android_ripple={{ color: "#fffff22" }}
               >
                 {({ pressed }) => (
@@ -27,11 +29,13 @@ export default function Index() {
                     <View className={"h-full w-1/2"}>
                       <Image source={item.image} className={"size-full"} resizeMode={"contain"} />
                     </View>
-                    <View className={cn("offer-card_info", isEven ? 'pl-10' : 'pr-10')}>
+
+                    <View className={cn("offer-card__info", isEven ? 'pl-10' : 'pr-10')}>
                       <Text className="h1-bold text-white leading-tight">
                         {item.title}
                       </Text>
-                      <Image source={images.arrowRight}
+                      <Image
+                        source={images.arrowRight}
                         className="size-10"
                         resizeMode="contain"
                         tintColor="#ffffff"
@@ -43,7 +47,7 @@ export default function Index() {
             </View>
           )
         }}
-        contentContainerClassName="pd-28 px-5"
+        contentContainerClassName="pb-28 px-5"
         ListHeaderComponent={() => (
           <View className="flex-between flex-row w-full my-5">
             <View className="flex-start">
@@ -53,14 +57,11 @@ export default function Index() {
                 <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
               </TouchableOpacity>
             </View>
+
             <CartButton />
           </View>
         )}
-
       />
-
-
-
     </SafeAreaView>
   );
 }

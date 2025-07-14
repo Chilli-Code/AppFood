@@ -6,6 +6,21 @@ import useAuthStore from "@/store/auth.store";
 import * as Sentry from '@sentry/react-native';
 import './global.css';
 
+Sentry.init({
+  dsn: 'https://2c32f1dad1bc3a3be0ef4323f1e90542@o4509662689820672.ingest.de.sentry.io/4509662977130576',
+
+  // Adds more context data to events (IP address, cookies, user, etc.)
+  // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
+  sendDefaultPii: true,
+
+  // Configure Session Replay
+  replaysSessionSampleRate: 1,
+  replaysOnErrorSampleRate: 1,
+  integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
 
 
 export default Sentry.wrap(function RootLayout() {
