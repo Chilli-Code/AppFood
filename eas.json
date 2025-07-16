@@ -9,7 +9,12 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "SENTRY_AUTH_TOKEN": "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",
+        "SENTRY_ORG": "keku-zq",
+        "SENTRY_PROJECT": "app_food"
+      }
     },
     "production": {
       "autoIncrement": true

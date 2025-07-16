@@ -1,4 +1,6 @@
 import { useFonts } from 'expo-font';
+import "@/app/global.css";
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
@@ -45,5 +47,5 @@ export default Sentry.wrap(function RootLayout() {
 
   if(!fontsLoaded || isLoading) return null;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return <GluestackUIProvider mode="light"><Stack screenOptions={{ headerShown: false }} /></GluestackUIProvider>;
 });

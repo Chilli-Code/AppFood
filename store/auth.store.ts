@@ -1,4 +1,4 @@
-import { account } from "@/lib/appwrite"; // 👈 asegúrate que `account` esté aquí
+import { account, getCurrentUser } from "@/lib/appwrite"; // 👈 asegúrate que `account` esté aquí
 import { User } from "@/type";
 import { create } from "zustand";
 
@@ -24,20 +24,15 @@ const useAuthStore = create<AuthState>((set) => ({
     setUser: (user) => set({ user }),
     setLoading: (value) => set({ isLoading: value }),
 
+     // 👈 asegúrate que esté importado
+
 fetchAuthenticatedUser: async () => {
   set({ isLoading: true });
 
   try {
-    const session = await account.getSession("current");
-    if (!session || !session.current) {
-      set({ isAuthenticated: false, user: null, isLoading: false });
-      return;
-    }
-
-    const user = await account.get();
-    if (user) set({ isAuthenticated: true, user: user as unknown as User });
+    const user = await getCurrentUser(); // 👈 usa tu función personalizada
+    if (user) set({ isAuthenticated: true, user: user as User });
     else set({ isAuthenticated: false, user: null });
-
   } catch (e) {
     console.log('fetchAuthenticatedUser Error', e);
     set({ isAuthenticated: false, user: null });
@@ -45,6 +40,7 @@ fetchAuthenticatedUser: async () => {
     set({ isLoading: false });
   }
 },
+
 
 
 

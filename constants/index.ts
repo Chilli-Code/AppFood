@@ -20,6 +20,7 @@ import user from "@/assets/icons/user.png";
 import arrowBack from "../assets/icons/arrow-back.png";
 
 import notification from "@/assets/icons/notification.png";
+import setting from "@/assets/icons/setting.png";
 import avatar from "@/assets/images/avatar.png";
 import avocado from "@/assets/images/avocado.png";
 import bacon from "@/assets/images/bacon.png";
@@ -161,6 +162,7 @@ export const toppings = [
 
 export const images = {
     fondohome,
+    setting,
     avatar,
     notification,
     avocado,

@@ -7,7 +7,7 @@ export class HeaderPr extends Component {
     render() {
         return (
 <ImageBackground
-  source={images.fondoHome}
+  source={images.fondohome}
   resizeMode="cover"
   className="w-screen h-[250px] mt-5 mb-8"
   style={{

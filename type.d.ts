@@ -17,10 +17,10 @@ export interface Category extends Models.Document {
 }
 
 export interface User extends Models.Document {
-    name: string;
-    email: string;
-    avatar: string;
-    
+  name: string;
+  email: string;
+  avatar: string;
+  accountId: string;
 }
 
 export interface CartCustomization {
@@ -72,9 +72,13 @@ interface CustomButtonProps {
     isLoading?: boolean;
 }
 
-interface CustomHeaderProps {
-    title?: string;
+ interface CustomHeaderProps {
+  title?: string;
+  showRightIcon?: boolean;
+  rightIcon?: any;       
+  onRightPress?: () => void;  
 }
+
 
 interface CustomInputProps {
     placeholder?: string;

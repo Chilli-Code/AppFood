@@ -1,13 +1,14 @@
 import CartItems from '@/components/CartItems';
 import CustomButton from '@/components/CustomButton';
 import CustomHeader from '@/components/CustomHeader';
+import { images } from '@/constants';
 import { useCartStore } from '@/store/cart.store';
 import { PaymentInfoStripeProps } from '@/type';
 import cn from "clsx";
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 
 const PaymentInfoStripe = ({ label,  value,  labelStyle,  valueStyle, }: PaymentInfoStripeProps) => (
     <View className="flex-between flex-row my-1">
@@ -24,6 +25,7 @@ const Cart = () => {
 const { items, getTotalItems } = useCartStore();
 const totalItems = getTotalItems();
 const totalPrice = getTotalItems();
+const router = useRouter();
 
   return (
     <SafeAreaView className="bg-white h-full ">
@@ -32,7 +34,7 @@ const totalPrice = getTotalItems();
         renderItem={({ item }) => <CartItems item={item} />}
         keyExtractor={(item) => item.id}
         contentContainerClassName="pb-28 px-5 pt-5"
-        ListHeaderComponent={() => <CustomHeader title="Your Cart" />}
+        ListHeaderComponent={() => <CustomHeader title="Your Cart" rightIcon={images.setting} onRightPress={() => router.push("/screens/Notification")} />}
         ListEmptyComponent={() => <Text>Cart Empy</Text>}
         ListFooterComponent={() => (
           <View className="gap-5">

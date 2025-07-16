@@ -6,8 +6,14 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+
 const Profile = () => {
-const logout = useAuthStore((state) => state.logout);
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
+
+  const avatarUrl = user?.avatar;
+  
+  console.log(avatarUrl);
 
 const handleLogout = async () => {
   await logout();
@@ -22,8 +28,9 @@ const handleLogout = async () => {
       <View className="flex items-center mb-6">
         <View className="relative">
           <Image
-            source={images.avatar}
+            source={{ uri: user?.avatar }}
             className="w-24 h-24 rounded-full"
+            resizeMode="cover"
           />
           <TouchableOpacity className="absolute border border-white-100 bottom-0 right-2 bg-white-200 rounded-full p-1">
             <Image source={images.pencil} className="w-4 h-4" />
@@ -44,7 +51,7 @@ const handleLogout = async () => {
           </View>
           <View className="flex-1">
             <Text className="text-gray-100 text-left font-[400]">Full Name</Text>
-            <Text className="text-dark-100 font-semibold text-left mt-1">Adrian Hajdin</Text>
+            <Text className="text-dark-100 font-semibold text-left mt-1">{user?.name}</Text>
           </View>
         </View>
         <View className="mb-5  rounded-lg p-3 flex-row items-center">
@@ -58,7 +65,7 @@ const handleLogout = async () => {
           </View>
           <View className="flex-1">
             <Text className="text-gray-100 text-left font-[400]">Email</Text>
-            <Text className="text-dark-100 font-semibold text-left mt-1">adrian@j smastery.com</Text>
+            <Text className="text-dark-100 font-semibold text-left mt-1">{user?.email}</Text>
           </View>
         </View>
         <View className="mb-5 rounded-lg p-3 flex-row items-center">
