@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.chillicode.FoodAPP"
     },
     "web": {
       "bundler": "metro",
@@ -45,6 +46,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2fdedd7c-6889-43ff-af52-d51f869ed4b2"
+      }
     }
   }
 }

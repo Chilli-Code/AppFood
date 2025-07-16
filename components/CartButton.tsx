@@ -11,8 +11,8 @@ const CartButton = () => {
 
 
     return (
-        <TouchableOpacity className="cart-btn" onPress={() => router.push('/cart')}>
-            <Image source={images.bag} className="size-5" resizeMode="contain" />
+        <TouchableOpacity className="cart-btn border border-white-100" onPress={() => router.push('/cart')}>
+            <Image source={images.bag} className="size-5 " resizeMode="contain" />
 
             {totalItems > 0 && (
                 <View className="cart-badge">

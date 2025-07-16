@@ -24,11 +24,11 @@ const SignUp = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Crear usuario (esto ya crea la sesión automáticamente)
+      
       await createUser({ name, email, password });
 
 
-      // 4. Mostrar modal de éxito
+      
       setShowModal(true);
     } catch (error: any) {
       Alert.alert("Error", error.message || "Something went wrong");
@@ -39,7 +39,7 @@ const SignUp = () => {
 
   const handleGoToHome = () => {
     setShowModal(false);
-    setIsAuthenticated(true); // Autenticar al presionar el botón
+    setIsAuthenticated(true); 
     router.replace("/");
   };
 

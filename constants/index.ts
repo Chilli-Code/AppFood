@@ -19,6 +19,7 @@ import trash from "@/assets/icons/trash.png";
 import user from "@/assets/icons/user.png";
 import arrowBack from "../assets/icons/arrow-back.png";
 
+import notification from "@/assets/icons/notification.png";
 import avatar from "@/assets/images/avatar.png";
 import avocado from "@/assets/images/avocado.png";
 import bacon from "@/assets/images/bacon.png";
@@ -29,6 +30,7 @@ import cheese from "@/assets/images/cheese.png";
 import coleslaw from "@/assets/images/coleslaw.png";
 import cucumber from "@/assets/images/cucumber.png";
 import emptyState from "@/assets/images/empty-state.png";
+import fondohome from "@/assets/images/fondo-home.png";
 import fries from "@/assets/images/fries.png";
 import loginGraphic from "@/assets/images/login-graphic.png";
 import logo from "@/assets/images/logo.png";
@@ -158,7 +160,9 @@ export const toppings = [
 ];
 
 export const images = {
+    fondohome,
     avatar,
+    notification,
     avocado,
     bacon,
     burgerOne,

@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
 const Search = () => {
   const { category, query } = useLocalSearchParams<{query: string; category: string}>();
 
@@ -78,6 +77,7 @@ const Search = () => {
           ) : null
         }
       />
+      
     </SafeAreaView>
   )
 }
@@ -85,6 +85,7 @@ const Search = () => {
 export default Search;
 
 
+// <Button title="Search" onPress={() => seed().catch((error) => console.log('Faild to seed the database', error))}  />
 
 
 

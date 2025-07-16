@@ -69,10 +69,10 @@ async function uploadImageToStorage(imageUrl: string) {
     const blob = await response.blob();
 
 const fileObj: FileObject = {
-  name: "==name is here==", // Ajusta el nombre según el contexto
-  type: blob.type || "image/png", // Tipo del archivo o predeterminado
-  size: blob.size, // Tamaño en bytes
-  uri: imageUrl, // URL de la imagen
+  name: imageUrl.split("/").pop() || `file-${Date.now()}.png`,
+  type: blob.type || "image/png",
+  size: blob.size,
+  uri: imageUrl,
 };
     const file = await storage.createFile(
         appwriteConfig.bucketId,
@@ -121,7 +121,9 @@ async function seed(): Promise<void> {
 
     // 4. Create Menu Items
     const menuMap: Record<string, string> = {};
-    for (const item of data.menu) {
+    for (let i = 0; i < data.menu.length; i++) {
+        const item = data.menu[i];
+        console.log(`Subiendo imagen y creando menú: ${item.name} (${i + 1}/${data.menu.length})`);
         const uploadedImage = await uploadImageToStorage(item.image_url);
 
         const doc = await databases.createDocument(

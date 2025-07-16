@@ -1,12 +1,11 @@
 import cn from 'clsx';
 import { Fragment } from "react";
-import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import CartButton from "@/components/CartButton";
+import HeaderPr from '@/components/HeaderPr';
 import { images, offers } from "@/constants";
 import useAuthStore from "@/store/auth.store";
-
 export default function Index() {
   const { user } = useAuthStore();
   // console.log("USER", JSON.stringify(user, null, 2));
@@ -49,17 +48,8 @@ export default function Index() {
         }}
         contentContainerClassName="pb-28 px-5"
         ListHeaderComponent={() => (
-          <View className="flex-between flex-row w-full my-5">
-            <View className="flex-start">
-              <Text className="small-bold text-primary">DELIVER TO</Text>
-              <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
-                <Text className="paragraph-bold text-dark-100">Croatia</Text>
-                <Image source={images.arrowDown} className="size-3" resizeMode="contain" />
-              </TouchableOpacity>
-            </View>
-
-            <CartButton />
-          </View>
+            <HeaderPr />
+          
         )}
       />
     </SafeAreaView>
