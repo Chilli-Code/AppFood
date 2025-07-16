@@ -31,6 +31,13 @@ interface DummyData {
     menu: MenuItem[];
 }
 
+interface FileObject {
+  name: string;
+  type: string;
+  size: number;
+  uri: string;
+}
+
 // ensure dummyData has correct shape
 const data = dummyData as DummyData;
 
@@ -61,13 +68,12 @@ async function uploadImageToStorage(imageUrl: string) {
     const response = await fetch(imageUrl);
     const blob = await response.blob();
 
-    const fileObj = {
-        name: imageUrl.split("/").pop() || `file-${Date.now()}.jpg`,
-        type: blob.type,
-        size: blob.size,
-        uri: imageUrl,
-    };
-
+const fileObj: FileObject = {
+  name: "==name is here==", // Ajusta el nombre según el contexto
+  type: blob.type || "image/png", // Tipo del archivo o predeterminado
+  size: blob.size, // Tamaño en bytes
+  uri: imageUrl, // URL de la imagen
+};
     const file = await storage.createFile(
         appwriteConfig.bucketId,
         ID.unique(),

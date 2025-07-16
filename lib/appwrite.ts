@@ -58,6 +58,7 @@ export const signIn = async ({email, password}: SignInParams) =>{
     }
 };
 
+
 export const getCurrentUser = async () =>{
     try{
         const currentAccount = await account.get();
@@ -99,13 +100,14 @@ export const getMenu = async({ category, query }: GetMenuParams) => {
 }
 
 export const getCategories = async () => {
-    try{
+    try {
         const categories = await databases.listDocuments(
             appwriteConfig.databaseId,
             appwriteConfig.categoriesCollectionId,
         )
 
-    }catch(e){
+        return categories.documents;
+    } catch (e) {
         throw new Error(e as string);
     }
 }
