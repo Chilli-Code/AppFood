@@ -1,20 +1,15 @@
-import CustomHeader from '@/components/CustomHeader';
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomHeader from '@/components/CustomHeader'
+import React from 'react'
+import { Text, View } from 'react-native'
+const Notification = () => {
+  return (
+    <View>
+      <CustomHeader title="Notification" />
 
-export class Notification extends Component {
-  render() {
-    return (
-      <SafeAreaView className="bg-white h-full">
-        <View className="pb-28 px-5 pt-5">
-        <CustomHeader title="Notifications" />
-
-        </View>
-        <Text>Notification</Text>
-      </SafeAreaView>
-    )
-  }
+      <Text className="text-center text-gray-500 mt-10">No notifications yet</Text>
+      <Text>Notification</Text>
+    </View>
+  )
 }
 
-export default Notification;
+export default Notification

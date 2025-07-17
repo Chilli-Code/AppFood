@@ -19,6 +19,7 @@ import trash from "@/assets/icons/trash.png";
 import user from "@/assets/icons/user.png";
 import arrowBack from "../assets/icons/arrow-back.png";
 
+import add from "@/assets/icons/add.png";
 import notification from "@/assets/icons/notification.png";
 import setting from "@/assets/icons/setting.png";
 import avatar from "@/assets/images/avatar.png";
@@ -30,6 +31,7 @@ import buritto from "@/assets/images/buritto.png";
 import cheese from "@/assets/images/cheese.png";
 import coleslaw from "@/assets/images/coleslaw.png";
 import cucumber from "@/assets/images/cucumber.png";
+import detail from "@/assets/images/detail.png";
 import emptyState from "@/assets/images/empty-state.png";
 import fondohome from "@/assets/images/fondohome.png";
 import fries from "@/assets/images/fries.png";
@@ -41,8 +43,10 @@ import onionRings from "@/assets/images/onion-rings.png";
 import onions from "@/assets/images/onions.png";
 import pizzaOne from "@/assets/images/pizza-one.png";
 import salad from "@/assets/images/salad.png";
+import starts from "@/assets/images/stars.png";
 import success from "@/assets/images/success.png";
 import tomatoes from "@/assets/images/tomatoes.png";
+
 
 export const CATEGORIES = [
     {
@@ -162,6 +166,9 @@ export const toppings = [
 
 export const images = {
     fondohome,
+    add,
+    detail,
+    starts,
     setting,
     avatar,
     notification,

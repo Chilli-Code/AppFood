@@ -110,3 +110,8 @@ interface GetMenuParams {
     category: string;
     query: string;
 }
+// ...todo tu contenido anterior...
+
+declare module 'react-native-gesture-bottom-sheet';
+declare module '@gorhom/bottom-sheet';
+

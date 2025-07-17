@@ -1,14 +1,27 @@
 import cn from 'clsx';
-import { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import HeaderPr from '@/components/HeaderPr';
 import { images, offers } from "@/constants";
 import useAuthStore from "@/store/auth.store";
+
+import WelcomeModal from '@/components/WelcomeModal';
 export default function Index() {
   const { user } = useAuthStore();
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   // console.log("USER", JSON.stringify(user, null, 2));
+
+
+
+  // Cuando el usuario exista, mostramos la modal automáticamente
+  React.useEffect(() => {
+    if (user) {
+      setShowWelcomeModal(true);
+    }
+  }, [user]);
+  const handleCloseModal = () => setShowWelcomeModal(false);
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList
@@ -51,6 +64,12 @@ export default function Index() {
             <HeaderPr />
           
         )}
+      />
+            {/* Aquí la modal */}
+      <WelcomeModal
+        visible={showWelcomeModal}
+        onClose={handleCloseModal}
+        userName={user?.name}
       />
     </SafeAreaView>
   );

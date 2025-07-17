@@ -111,3 +111,17 @@ export const getCategories = async () => {
         throw new Error(e as string);
     }
 }
+
+
+export const getMenuItemById = async (id: string) => {
+  try {
+    const item = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.menuCollectionId,
+      id
+    );
+    return item;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
