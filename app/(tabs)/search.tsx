@@ -13,11 +13,13 @@ import { MenuItem } from '@/type';
 import cn from "clsx";
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Search = () => {
   const { category, query } = useLocalSearchParams<{query: string; category: string}>();
+    const { t } = useTranslation();
 
   const { data, refetch, loading } = useAppwrite({
     fn:getMenu,
@@ -57,9 +59,9 @@ const Search = () => {
         <View className="my-5 gap-5">
           <View className="flex-between flex-row w-full">
             <View className="flex-start">
-              <Text className="small-bold uppercase text-primary">Search</Text>
+              <Text className="small-bold uppercase text-primary">{t('search')}</Text>
               <View className="flex-start flex-row gap-x-1 mt-0.5">
-                <Text className="paragraph-semibold text-dark-100">Find your favorite food</Text>
+                <Text className="paragraph-semibold text-dark-100">{t('find_your_favorite_food')}</Text>
               </View>
             </View>
             <CartButton />
@@ -71,8 +73,8 @@ const Search = () => {
       ListEmptyComponent={() => !loading ? (
         <View className="flex-1 items-center justify-center">
           <Image source={images.emptyState} className="size-72" resizeMode="contain" />
-          <Text className="text-dark-100 text-lg font-semibold">Nothing matched your search</Text>
-          <Text className="text-gray-200 font-medium">Try a different search term or check for typos.</Text>
+          <Text className="text-dark-100 text-lg font-semibold">{t('nothing_matched_your_search')}</Text>
+          <Text className="text-gray-200 font-medium">{t('try_different_search_term')}</Text>
           </View>
           ) : null
         }

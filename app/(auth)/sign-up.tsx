@@ -5,9 +5,12 @@ import { createUser } from "@/lib/appwrite";
 import useAuthStore from "@/store/auth.store";
 import { Link, router } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Alert, Image, Modal, Text, TouchableOpacity, View } from "react-native";
 
 const SignUp = () => {
+          const { t } = useTranslation();
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showModal, setShowModal] = useState(false); // Estado para controlar la modal
@@ -46,23 +49,23 @@ const SignUp = () => {
   return (
     <View className="gap-10 bg-white rounded-lg p-5 mt-5">
       <CustomInput
-        placeholder="Enter your full name"
+        placeholder={t('enter_full_name')}
         value={form.name}
         onChangeText={(text) => setForm((prev) => ({ ...prev, name: text }))}
-        label="Full name"
+        label={t('lbfullname')}
       />
       <CustomInput
-        placeholder="Enter your email"
+        placeholder={t('enter_email')}
         value={form.email}
         onChangeText={(text) => setForm((prev) => ({ ...prev, email: text }))}
-        label="Email"
+        label={t('lbemail')}
         keyboardType="email-address"
       />
       <CustomInput
-        placeholder="Enter your password"
+        placeholder={t('enter_password')}
         value={form.password}
         onChangeText={(text) => setForm((prev) => ({ ...prev, password: text }))}
-        label="Password"
+        label={t('lbpassword')}
         secureTextEntry={true}
       />
 
@@ -74,10 +77,10 @@ const SignUp = () => {
 
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">
-          Already have an account?
+          {t('already_have_account')}
         </Text>
         <Link href="/sign-in" className="base-bold text-primary">
-          Sign In
+          {t('sign_in')}
         </Link>
       </View>
 

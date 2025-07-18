@@ -1,17 +1,19 @@
-import cn from 'clsx';
-import React, { Fragment, useState } from "react";
-import { FlatList, Image, Pressable, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
 import HeaderPr from '@/components/HeaderPr';
 import { images, offers } from "@/constants";
 import useAuthStore from "@/store/auth.store";
+import cn from 'clsx';
+import React, { Fragment, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { FlatList, Image, Pressable, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import WelcomeModal from '@/components/WelcomeModal';
 export default function Index() {
   const { user } = useAuthStore();
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   // console.log("USER", JSON.stringify(user, null, 2));
+    const { t } = useTranslation();
+
 
 
 
@@ -22,12 +24,19 @@ export default function Index() {
     }
   }, [user]);
   const handleCloseModal = () => setShowWelcomeModal(false);
+
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList
         data={offers}
         renderItem={({ item, index }) => {
           const isEven = index % 2 === 0;
+const titleKey = item.title.toLowerCase().replace(/\s+/g, "_"); // ej: SUMMER COMBO → summer_combo
+const translatedTitle = t(titleKey);
+
+        
+
 
           return (
             <View>
@@ -44,7 +53,7 @@ export default function Index() {
 
                     <View className={cn("offer-card__info", isEven ? 'pl-10' : 'pr-10')}>
                       <Text className="h1-bold text-white leading-tight">
-                        {item.title}
+                        {translatedTitle}
                       </Text>
                       <Image
                         source={images.arrowRight}
@@ -60,12 +69,12 @@ export default function Index() {
           )
         }}
         contentContainerClassName="pb-28 px-5"
-        ListHeaderComponent={() => (
-            <HeaderPr />
-          
-        )}
-      />
-            {/* Aquí la modal */}
+        ListHeaderComponent={() => {
+
+          return <HeaderPr />;
+        }} />
+
+      {/* Aquí la modal */}
       <WelcomeModal
         visible={showWelcomeModal}
         onClose={handleCloseModal}

@@ -3,8 +3,10 @@ import useAuthStore from "@/store/auth.store";
 import { LinearGradient } from "expo-linear-gradient";
 import { Redirect, Slot } from "expo-router";
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Text, View } from "react-native";
 export default function AuthLayout() {
+    const { t } = useTranslation();
     const { isAuthenticated } = useAuthStore();
 
     if (isAuthenticated) return <Redirect href="/" />
@@ -27,8 +29,8 @@ export default function AuthLayout() {
                             }}
                         />
                         <View className="absolute top-32 left-0 right-0 rounded-t-lg p-5">
-                            <Text className="text-center text-4xl text-white-100 font-bold">Get Started now</Text>
-                            <Text className="text-center mt-6 text-white-100 text-base font-light ">Create an account or log in to explore</Text>
+                            <Text className="text-center text-4xl text-white-100 font-bold">{t('get_started')}</Text>
+                            <Text className="text-center mt-6 text-white-100 text-base font-light ">{t('create_explore')}</Text>
                         </View>
 
                     </ImageBackground>

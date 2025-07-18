@@ -1,6 +1,7 @@
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import LottieView from 'lottie-react-native';
 import React, { useCallback, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 
 interface WelcomeModalProps {
@@ -12,6 +13,7 @@ interface WelcomeModalProps {
 export default function WelcomeModal({ visible, onClose, userName }: WelcomeModalProps) {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const animationRef = useRef<LottieView>(null);
+    const { t } = useTranslation();
 
   useEffect(() => {
     if (visible) {
@@ -55,10 +57,10 @@ export default function WelcomeModal({ visible, onClose, userName }: WelcomeModa
             style={{ width: 200, height: 200 }}
           />
           <Text className="text-xl font-bold mt-2 mb-1 text-center">
-            ¡Bienvenido, {userName ?? 'Usuario'}!
+            {t('hello')}, {userName ?? 'Usuario'}!
           </Text>
           <Text className="text-base text-gray-700 text-center">
-            Disfruta de nuestro servicio 🎉
+            {t('enjoy_service')} 🎉
           </Text>
         </View>
 
@@ -66,7 +68,7 @@ export default function WelcomeModal({ visible, onClose, userName }: WelcomeModa
           onPress={() => bottomSheetModalRef.current?.dismiss()}
           className="bg-blue-600 rounded-md py-3 px-6 mt-4 w-full"
         >
-          <Text className="text-white text-center font-semibold">Cerrar</Text>
+          <Text className="text-white text-center font-semibold">{t('close')}</Text>
         </Pressable>
       </BottomSheetView>
     </BottomSheetModal>

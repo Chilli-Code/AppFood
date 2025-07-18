@@ -3,11 +3,13 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+import i18n from '@/lib/i18n';
 import useAuthStore from "@/store/auth.store";
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import * as Sentry from '@sentry/react-native';
+import { I18nextProvider } from 'react-i18next';
+import Toast, { BaseToast, ToastProps } from 'react-native-toast-message';
 import './global.css';
-
 
 Sentry.init({
   dsn: 'https://2c32f1dad1bc3a3be0ef4323f1e90542@o4509662689820672.ingest.de.sentry.io/4509662977130576',
@@ -16,6 +18,18 @@ Sentry.init({
   replaysOnErrorSampleRate: 1,
   integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
 });
+
+const toastConfig = {
+  success: (props: ToastProps) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#28a745', backgroundColor: '#28a745' }}
+      text1Style={{ color: 'white', fontSize: 15 }}
+      text2Style={{ color: 'white', fontSize: 15 }}
+    />
+    
+  ),
+};
 
 export default Sentry.wrap(function RootLayout() {
   const { isLoading, fetchAuthenticatedUser } = useAuthStore();
@@ -40,11 +54,13 @@ export default Sentry.wrap(function RootLayout() {
   if (!fontsLoaded || isLoading) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
-        <Stack screenOptions={{ headerShown: false }} />
-      </BottomSheetModalProvider>
-    </GestureHandlerRootView>
-
-      );
+    <I18nextProvider i18n={i18n}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+          <Toast config={toastConfig} />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </I18nextProvider>
+  );
 });

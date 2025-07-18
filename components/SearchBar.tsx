@@ -1,9 +1,11 @@
 import { images } from "@/constants";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Image, TextInput, TouchableOpacity, View } from "react-native";
 
 const Searchbar = () => {
+        const { t } = useTranslation();
     const params = useLocalSearchParams<{ query: string }>();
     const [query, setQuery] = useState(params.query);
 
@@ -21,7 +23,7 @@ const Searchbar = () => {
         <View className="searchbar">
             <TextInput
                 className="flex-1 p-5"
-                placeholder="Search for pizzas, burgers..."
+                placeholder={t('search_placeholder')}
                 value={query}
                 onChangeText={handleSearch}
                 onSubmitEditing={handleSubmit}
