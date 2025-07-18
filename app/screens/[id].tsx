@@ -63,11 +63,11 @@ const { i18n, t } = useTranslation();
   return (
     <SafeAreaView className="bg-white flex-1">
       {/* El ScrollView solo contiene el contenido scrollable */}
-      <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
-        <CustomHeader title="Detalles" rightIcon={false} />
+      <ScrollView contentContainerStyle={{ padding: 10, paddingBottom: 100 }}>
+        <CustomHeader title={t('Detalles')} rightIcon={false} />
 
         {/* Resto del contenido que ya tenías */}
-        <View className="flex flex-row">
+        <View className="flex flex-row gap-2">
           <View className="w-[50%] px-4 flex-col">
             <View className="mt-5">
               <Text className="h1-bold text-dark-100 font-semibold mb-2">{menuItem.name}</Text>
@@ -176,7 +176,7 @@ const { i18n, t } = useTranslation();
               id: `item-${menuItem.$id}`,
               name: menuItem.name,
               price: menuItem.price,
-              image_url: menuItem.imageUrl,
+              image_url: menuItem.image_url ?? menuItem.imageUrl ?? '',
               quantity: quantity,
               customizations: [],
             });

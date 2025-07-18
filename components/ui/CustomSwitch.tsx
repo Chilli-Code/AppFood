@@ -20,7 +20,7 @@ const CustomSwitch = ({
   value,
   onToggle,
   duration = 400,
-  trackColors = { on: '#DFE0F3', off: '#FE8C00' },
+  trackColors = { on: '#FE8C00', off: '#DFE0F3' },
 }: CustomSwitchProps) => {
   const height = useSharedValue(0);
   const width = useSharedValue(0);

@@ -36,6 +36,7 @@ export const resources = {
       add_cart:'Add to cart',
       freedeliver:'Free Delivery',
       added_to_cart: "1 has been added",
+      titledetail: 'Details',
 
       // Cart
       your_cart: 'Your Cart',
@@ -47,6 +48,30 @@ export const resources = {
       discount: 'Discount',
       total: 'Total',
 
+      //Profile
+      titleprofile: 'Profile',
+      lblphone:'Phone number',
+      //edit profile
+      titleeditinfo:'Edit personal data',
+      bteditprofile:'Edit Profile',
+      lbladdres1:'Address 1 (Home)',
+      lbladdres2:'Address 2 (Work)',
+      lblgender:'Gender',
+      select_genderM:'Male',
+      select_genderF:'Female',
+      select_gender_placeholder:'Select gender',
+      lbladdress:'Address',
+      location_loading:'Getting location...',
+      locationactual:'Use current location',
+      message_update_profile:'Success, profile updated',
+
+      
+      
+
+
+
+
+
       // Ajustes
       setting: 'Settings',
       profile: 'PROFILE',
@@ -56,6 +81,12 @@ export const resources = {
       language: 'Language',
       other: 'OTHER',
       appearance:'Appearance',
+      saveInfo: 'Save changes',
+      //Location Toast
+            location_permission_denied: 'Permission denied',
+      location_permission_error: 'Could not enable location',
+      location_enabled: 'Location enabled',
+      location_disabled: 'Location disabled',
 
       // Pantallas / flujos generales
       add_to_cart: 'Add to cart',
@@ -117,12 +148,43 @@ export const resources = {
       dark: 'Oscuro',
       language: 'Idioma',
       other: 'OTROS',
+      saveInfo: 'Guardar cambios',
+      lblgender:'Genero',
+      // Location Toast
+
+            location_permission_denied: 'Permiso denegado',
+      location_permission_error: 'No se pudo activar la ubicación',
+      location_enabled: 'Ubicación activada',
+      location_disabled: 'Ubicación desactivada',
 
       //MenuDetail
       calories: 'Calorias',
       protein: 'Proteina',
       add_cart:'Añadir al carrito',
       freedeliver:'Envío gratuito',
+      titledetail: 'Detalles',
+
+      //Profile
+      titleprofile: 'Perfil',
+      lblphone:'Numero de telefono',
+      //edit Profile
+      titleeditinfo:'Editar datos personales',
+      bteditprofile:'Edit Profile',
+      lbladdres1:'Dirección 1 (Casa)',
+      lbladdres2:'Dirección 2 (Trabajo)',
+      select_genderM:'Masculino',
+      select_genderF:'Femenino',
+      lbladdress:'Direccion',
+      select_gender_placeholder:'Seleciona género',
+      locationactual:'Usar ubicación actual',
+      location_loading:'Obteniendo ubicación...',
+      message_update_profile:'Éxito, Perfil actualizado',
+
+
+
+
+
+
 
 
       //Cart

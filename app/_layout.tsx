@@ -19,17 +19,36 @@ Sentry.init({
   integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
 });
 
+
 const toastConfig = {
   success: (props: ToastProps) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: '#28a745', backgroundColor: '#28a745' }}
+      style={{ borderLeftColor: '#28a745', backgroundColor: '#6cd484' }}
       text1Style={{ color: 'white', fontSize: 15 }}
       text2Style={{ color: 'white', fontSize: 15 }}
     />
-    
+  ),
+
+  error: (props: ToastProps) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#dc3545', backgroundColor: '#dc3545' }}
+      text1Style={{ color: 'white', fontSize: 15 }}
+      text2Style={{ color: 'white', fontSize: 15 }}
+    />
+  ),
+    info: (props: ToastProps) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#a5e6e2', backgroundColor: '#adaaaa' }}
+      text1Style={{ color: 'white', fontSize: 15 }}
+      text2Style={{ color: 'white', fontSize: 15 }}
+    />
   ),
 };
+
+
 
 export default Sentry.wrap(function RootLayout() {
   const { isLoading, fetchAuthenticatedUser } = useAuthStore();

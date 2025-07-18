@@ -125,3 +125,45 @@ export const getMenuItemById = async (id: string) => {
     throw new Error(e as string);
   }
 };
+
+
+export async function updateProfile(data: {
+  name?: string;
+  phone?: string;
+  gender?: string;
+  addresses?: Array<{ type: string; address: string; lat: number; lng: number }>;
+}) {
+  const currentAcc = await account.get();
+  const accId = currentAcc.$id;
+
+  if (data.name) await account.updateName(data.name);
+
+
+  const docs = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.userCollectionId,
+    [Query.equal("accountId", accId)]
+  );
+
+  if (docs.total === 0) {
+    throw new Error("Documento de usuario no encontrado");
+  }
+
+  const userDoc = docs.documents[0];
+
+  const updateData: any = {};
+  if (data.name) updateData.name = data.name;
+  if (data.phone) updateData.phone = data.phone;
+  if (data.gender) updateData.gender = data.gender;
+  if (data.addresses) updateData.addresses = JSON.stringify(data.addresses);
+
+  const updatedDoc = await databases.updateDocument(
+    appwriteConfig.databaseId,
+    appwriteConfig.userCollectionId,
+    userDoc.$id,
+    updateData
+  );
+
+  return updatedDoc;
+}
+
