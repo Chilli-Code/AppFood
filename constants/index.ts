@@ -1,13 +1,18 @@
+import arrowBack from "@/assets/icons/arrow-back.png";
 import arrowDown from "@/assets/icons/arrow-down.png";
 import arrowRight from "@/assets/icons/arrow-right.png";
 import bag from "@/assets/icons/bag.png";
+import callMapa from "@/assets/icons/call-mapa.png";
 import check from "@/assets/icons/check.png";
 import clock from "@/assets/icons/clock.png";
 import dollar from "@/assets/icons/dollar.png";
+import drivericon from "@/assets/icons/drivericon.png";
 import envelope from "@/assets/icons/envelope.png";
 import home from "@/assets/icons/home.png";
+import locationMap from "@/assets/icons/location-map.png";
 import location from "@/assets/icons/location.png";
 import logout from "@/assets/icons/logout.png";
+import message from "@/assets/icons/message.png";
 import minus from "@/assets/icons/minus.png";
 import pencil from "@/assets/icons/pencil.png";
 import person from "@/assets/icons/person.png";
@@ -17,7 +22,6 @@ import search from "@/assets/icons/search.png";
 import star from "@/assets/icons/star.png";
 import trash from "@/assets/icons/trash.png";
 import user from "@/assets/icons/user.png";
-import arrowBack from "../assets/icons/arrow-back.png";
 
 import add from "@/assets/icons/add.png";
 import notification from "@/assets/icons/notification.png";
@@ -46,7 +50,6 @@ import salad from "@/assets/images/salad.png";
 import starts from "@/assets/images/stars.png";
 import success from "@/assets/images/success.png";
 import tomatoes from "@/assets/images/tomatoes.png";
-
 
 export const CATEGORIES = [
     {
@@ -166,6 +169,10 @@ export const toppings = [
 
 export const images = {
     fondohome,
+    locationMap,
+    callMapa,
+    drivericon,
+    message,
     add,
     detail,
     starts,

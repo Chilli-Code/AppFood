@@ -1,83 +1,103 @@
 // app/components/DeliveryMap.tsx
-import { images } from "@/constants";
-import React, { useRef } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps'; // ← importa así
 
-import BottomSheet from '@gorhom/bottom-sheet';
+
+import MapViewSection from '@/components/DeliveryMap';
+import { Image, StyleSheet, Text, View } from 'react-native';
+
+import BottomSheet from "@gorhom/bottom-sheet";
+import React, { useMemo, useRef } from "react";
+
+import { images } from '@/constants';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const DeliveryMap = () => {
-      const bottomSheetRef = useRef<BottomSheet>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  // hooks
+  const sheetRef = useRef<BottomSheet>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ["25%", "50%",], []);
+
+  // callbacks
+
+
   return (
     <View className="flex-1">
       {/* ---------- MAPA ---------- */}
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: 37.7749,
-          longitude: -122.4194,
-          latitudeDelta: 0.015,   // un poquito más de zoom
-          longitudeDelta: 0.015,
-        }}
-        showsUserLocation                                   // muestra la posición del usuario (si das permisos)
-      >
-        {/* Marcador del local */}
-        <Marker
-          coordinate={{ latitude: 37.7749, longitude: -122.4194 }}
-          title="Restaurante"
-          description="Tu comida sale de aquí"
-        />
-
-        {/* Marcador del repartidor */}
-        <Marker
-          coordinate={{ latitude: 37.7849, longitude: -122.4194 }}
-          pinColor="#FBBF24"         // amarillo Tailwind → rgb(251 191 36)
-          title="Repartidor"
-          description="En camino"
-        />
-      </MapView>
+      <MapViewSection />
 
       {/* ---------- PANEL DE INFORMACIÓN ---------- */}
+      <GestureHandlerRootView style={{ ...StyleSheet.absoluteFillObject, zIndex: 11, }}>
+
+
         <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        
-              snapPoints={['55%']}
+          ref={sheetRef}
+          snapPoints={snapPoints}
+          enableDynamicSizing={false}
+          
+          handleIndicatorStyle={{
+    backgroundColor: 'orange',  // aquí el color que quieras
 
-        backgroundStyle={{ backgroundColor: 'red', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-      >
-        {/* Rider */}
-        <View className="flex-row items-center">
-          <Image
-            source={images.avatar}   // pon aquí la URL real del avatar
-            className="w-12 h-12 rounded-full mr-3"
-          />
-          <View>
-            <Text className="font-semibold text-base">Cristopert Dastin</Text>
-            <Text className="text-gray-500 text-xs">ID 213752</Text>
+  }}
+
+        >
+          <View className=" w-full">
+            <View className="bg-[#101010]">
+            <View className="bg-white mx-6 my-5 rounded-full px-3 py-3 flex-row justify-between">
+              <View className="flex-row items-center gap-2 justify-between">
+                <View className="flex justify-center items-center">
+                  <Image source={images.avatar} resizeMode="stretch" className="w-11 h-11" />
+                </View>
+                <View className="flex justify-center items-center flex-row">
+                  <Text className="text-dark-100 font-semibold">Cristopert Dastin</Text>
+                </View>
+              </View>
+
+              <View className="flex-row gap-2 justify-between">
+                <Image source={images.message} className="w-11 h-11" resizeMode="cover" />
+                <Image source={images.callMapa} className="w-11 h-11" resizeMode="cover" />
+              </View>
+            </View>
+
+            </View>
+
+            <View className="mt-4 p-5">
+              <Text className="text-dark-100 font-semibold">Su plazo de entrega</Text>
+              <Text className="text-gray-200 font-light">Estimated 8:30 - 9:15 PM</Text>
+            </View>
+
+              <View className="mt-5 p-5">
+              <Text className="text-dark-100 font-semibold">Order</Text>
+              <View className="flex-row justify-between">
+              <Text className="text-gray-200 font-light">2 Burger With Meat</Text>
+              <Text className="text-gray-200 font-light">$283</Text>
+              </View>
+            </View>
           </View>
-        </View>
-
-        {/* Hora estimada */}
-        <Text className="mt-3 text-gray-500">Your delivery time</Text>
-        <Text className="font-bold text-lg">Estimated 8:30 – 9:15 PM</Text>
-
-        {/* Pedido */}
-        <View className="flex-row items-center mt-4">
-          <Text className="mr-2 text-gray-500">Order:</Text>
-          <Text className="font-semibold">2 Burger with Meat</Text>
-        </View>
-
-        {/* Importe */}
-        <Text className="font-bold text-xl mt-2">$283</Text>
-
-        {/* Botón llamar */}
-        <TouchableOpacity className="mt-4 bg-yellow-600 py-3 rounded-full active:opacity-80">
-          <Text className="text-white text-center font-semibold">Call</Text>
-        </TouchableOpacity>
-      </BottomSheet>
+        </BottomSheet>
+      </GestureHandlerRootView>
     </View>
   );
 };
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+
+
+
+  },
+  contentContainer: {
+    flex: 1,
+
+    alignItems: 'center',
+  },
+  bg:{
+    backgroundColor:'#000',
+  }
+});
 
 export default DeliveryMap;
