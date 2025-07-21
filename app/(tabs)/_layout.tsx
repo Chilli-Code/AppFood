@@ -4,10 +4,12 @@ import { useCartStore } from "@/store/cart.store";
 import { TabBarIconProps } from "@/type";
 import cn from "clsx";
 import { Redirect, Tabs } from "expo-router";
+import { useTranslation } from 'react-i18next';
 import { Image, Text, View } from "react-native";
 
 
 const TabBarIcon = ({ focused, icon, title }: TabBarIconProps) => (
+    
     <View className="tab-icon">
         <Image source={icon} className="size-7" resizeMode="contain" tintColor={focused ? '#FE8C00' : '#5D5F6D'} />
         <Text className={cn('text-sm font-bold', focused ? 'text-primary' : 'text-gray-200')}>
@@ -46,10 +48,12 @@ const NumberCart = () => {
 
 
 export default function TabLayout() {
+    const { t } = useTranslation();
     const { isAuthenticated } = useAuthStore();
     //const isAuthenticated = false;
     const { getTotalItems } = useCartStore();
     const totalItems = getTotalItems();
+
 
     if (!isAuthenticated) return <Redirect href="/sign-in" />
 
@@ -77,25 +81,25 @@ export default function TabLayout() {
             <Tabs.Screen
                 name='index'
                 options={{
-                    title: 'Home',
-                    tabBarIcon: ({ focused }) => <TabBarIcon title="Home" icon={images.home} focused={focused} />
+                    title: t('home'),
+                    tabBarIcon: ({ focused }) => <TabBarIcon title={t('home')} icon={images.home} focused={focused} />
                 }}
             />
             <Tabs.Screen
                 name='search'
                 options={{
-                    title: 'Search',
-                    tabBarIcon: ({ focused }) => <TabBarIcon title="Search" icon={images.search} focused={focused} />
+                    title: t('search'),
+                    tabBarIcon: ({ focused }) => <TabBarIcon title={t('search')} icon={images.search} focused={focused} />
                 }}
             />
 // ...existing code...
             <Tabs.Screen
                 name='cart'
                 options={{
-                    title: 'Cart',
+                    title: t('cart'),
                     tabBarIcon: ({ focused }) => (
                         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                            <TabBarIcon title="Cart" icon={images.bag} focused={focused} />
+                            <TabBarIcon title={t('cart')} icon={images.bag} focused={focused} />
                             {totalItems > 0 && <NumberCart />}
                         </View>
                     ),
@@ -105,8 +109,8 @@ export default function TabLayout() {
             <Tabs.Screen
                 name='profile'
                 options={{
-                    title: 'Profile',
-                    tabBarIcon: ({ focused }) => <TabBarIcon title="Profile" icon={images.person} focused={focused} />
+                    title: t('profileT'),
+                    tabBarIcon: ({ focused }) => <TabBarIcon title={t('profileT')} icon={images.person} focused={focused} />
                 }}
             />
         </Tabs>

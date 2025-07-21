@@ -84,7 +84,7 @@ const Setting = () => {
 
         <View className="bg-white rounded-lg">
           <View className="flex-row mt-4 items-center justify-between py-2">
-            <Text className="text-base">{t('push_notification')}</Text>
+            <Text className="text-base font-medium">{t('push_notification')}</Text>
             <CustomSwitch
               value={pushNotificationsEnabled}
               onToggle={handleTogglePushNotifications}
@@ -92,23 +92,24 @@ const Setting = () => {
           </View>
 
           <View className="flex-row mt-9 items-center justify-between">
-            <Text className="text-base">{t('location')}</Text>
+            <Text className="text-base font-medium">{t('location')}</Text>
             <CustomSwitch
               value={locationEnabled}
               onToggle={handleToggleLocation}
             />
           </View>
-
-          <View className="flex-row mt-9 items-center justify-between">
-            <Text className="text-base">{t('appearance')}</Text>
-            <CustomSwitch
-              value={locationEnabled}
-              onToggle={() => setLocationEnabled(prev => !prev)}
-            />
-          </View>
+{/*
+  <View className="flex-row mt-9 items-center justify-between">
+    <Text className="text-base font-medium">{t('appearance')}</Text>
+    <CustomSwitch
+      value={locationEnabled}
+      onToggle={() => setLocationEnabled(prev => !prev)}
+    />
+  </View>
+*/}
 
           <View className="py-2 mt-7 flex-row items-center justify-between">
-            <Text className="text-base mb-2">{t('language')}</Text>
+            <Text className="text-base mb-2 font-medium">{t('language')}</Text>
 
             <View className="bg-white rounded-lg">
               <TouchableOpacity
@@ -128,6 +129,44 @@ const Setting = () => {
           <Text className="text-gray-500 text-sm font-medium mb-1">{t('other')}</Text>
         </Link>
       </View>
+
+
+      <View className="px-4 mt-7 flex-row items-center justify-between">
+        <Text className="text-base mb-2 font-medium">{t('about_ticketis')}</Text>
+
+        <View className="bg-white rounded-lg">
+          <TouchableOpacity
+            className="flex-row items-center gap-2 justify-between py-4"
+          >
+            <ChevronRight className="text-orange-500" size={20} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View className="px-4 mt-7 flex-row items-center justify-between">
+        <Text className="text-base mb-2 font-medium">{t('privacy_policy')}</Text>
+
+        <View className="bg-white rounded-lg">
+          <TouchableOpacity
+            className="flex-row items-center gap-2 justify-between py-4"
+          >
+            <ChevronRight className="text-orange-500" size={20} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View className="px-4 mt-7 flex-row items-center justify-between">
+        <Text className="text-base mb-2 font-medium">{t('terms_and_conditions')}</Text>
+
+        <View className="bg-white rounded-lg">
+          <TouchableOpacity
+            className="flex-row items-center gap-2 justify-between py-4"
+          >
+            <ChevronRight className="text-orange-500" size={20} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
 
       <LanguageModal
         visible={showLanguageModal}

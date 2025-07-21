@@ -1,6 +1,5 @@
-import { CreateUserParams, GetMenuParams, SignInParams } from "@/type";
+import { CreateUserParams, GetMenuParams, SignInParams, User } from "@/type";
 import { Account, Avatars, Client, Databases, ID, Query, Storage } from "react-native-appwrite";
-
 export const appwriteConfig ={
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
@@ -12,6 +11,7 @@ export const appwriteConfig ={
     menuCollectionId: "6875bf03002eddab92b2",
     customizationsCollectionId: "6875c08c0003daba4a54",
     menuCustomizationsCollectionId: "6875c1d300308c344a50",
+    ordersCollectionId:'687d6959001f4fa2417c',
 
 }
 
@@ -30,25 +30,32 @@ export const storage = new Storage(client);
 const avatars = new Avatars(client); 
 
 
-export const createUser = async ({ email, password, name }: CreateUserParams) => {
-    try {
-        const newAccount = await account.create(ID.unique(), email, password, name)
-        if(!newAccount) throw Error;
+export const createUser = async ({ email, password, name, role }: CreateUserParams) => {
+  try {
+    const newAccount = await account.create(ID.unique(), email, password, name);
+    if (!newAccount) throw Error;
 
-        await signIn({ email, password });
+    await signIn({ email, password });
 
-        const avatarUrl = avatars.getInitialsURL(name || "User");
+    const avatarUrl = avatars.getInitialsURL(name || "User");
 
-        return await databases.createDocument(
-            appwriteConfig.databaseId,
-            appwriteConfig.userCollectionId,
-            ID.unique(),
-            { email, name, accountId: newAccount.$id, avatar: avatarUrl }
-        );
-    } catch (e) {
-        throw new Error(e as string);
-    }
-}
+    return await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      ID.unique(),
+      {
+        email,
+        name,
+        accountId: newAccount.$id,
+        avatar: avatarUrl,
+        role, // ✅ aquí lo guardas
+      }
+    );
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
 
 export const signIn = async ({email, password}: SignInParams) =>{
     try{
@@ -59,26 +66,25 @@ export const signIn = async ({email, password}: SignInParams) =>{
 };
 
 
-export const getCurrentUser = async () =>{
-    try{
-        const currentAccount = await account.get();
-        if(!currentAccount) throw Error;
+export const getCurrentUser = async (): Promise<User | null> => {
+  try {
+    const currentAccount = await account.get();
+    if (!currentAccount) throw Error;
 
-        const currentUser = await databases.listDocuments(
-            appwriteConfig.databaseId,
-            appwriteConfig.userCollectionId,
-            [Query.equal('accountId', currentAccount.$id)]
-        )
-        if(!currentUser) throw Error;
+    const currentUser = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.equal('accountId', currentAccount.$id)]
+    );
 
-        return currentUser.documents[0];
+    if (!currentUser || currentUser.documents.length === 0) return null;
 
-    }catch(e){
-        console.log(e);
-        throw new Error(e as string);
-    }
-}
-
+    return currentUser.documents[0] as unknown as User; // 👈 casteo explícito
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 
 export const getMenu = async({ category, query }: GetMenuParams) => {
     try{
@@ -166,4 +172,127 @@ export async function updateProfile(data: {
 
   return updatedDoc;
 }
+
+// Crear un nuevo pedido
+export const createOrder = async (orderData: {
+  userId: string;
+  repartidorId?: string | null;
+  status: string;
+  totalPrice: number;
+  deliveryAddress: string;
+  items: string; // JSON string
+}) => {
+  try {
+    const newOrder = await databases.createDocument(
+      appwriteConfig.databaseId,
+     appwriteConfig.ordersCollectionId, // reemplaza con tu collectionId de pedidos
+      ID.unique(),
+      orderData
+    );
+    return newOrder;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
+// Obtener pedidos por usuario
+export const getOrdersByUser = async (userId: string) => {
+  try {
+    const orders = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      [Query.equal("userId", userId)]
+    );
+    return orders.documents;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
+// Obtener pedidos asignados a repartidor
+export const getOrdersByRepartidor = async (repartidorId: string) => {
+  try {
+    const orders = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      [Query.equal("repartidorId", repartidorId)]
+    );
+    return orders.documents;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
+// Actualizar estado del pedido
+export const updateOrderStatus = async (orderId: string, status: string) => {
+  try {
+    const updatedOrder = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      orderId,
+      { status }
+    );
+    return updatedOrder;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+export const getActiveOrderByUser = async (userId: string) => {
+  
+
+  try {
+    const res = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      [
+        Query.equal("userId", userId),
+        Query.notEqual("status", "completed")
+      ]
+    );
+
+    return res.documents[0] || null;
+  } catch (error) {
+    
+    throw new Error("No se pudo obtener el pedido activo.");
+  }
+};
+
+export const deleteOrder = async (orderId: string) => {
+  try {
+    await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      orderId
+    );
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
+
+export const getOrderById = async (orderId: string) => {
+  try {
+    const order = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      orderId
+    );
+    return order;
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
+
+// Borrar pedido por ID
+export const deleteOrderById = async (orderId: string) => {
+  try {
+    await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.ordersCollectionId,
+      orderId
+    );
+  } catch (e) {
+    throw new Error(e as string);
+  }
+};
 

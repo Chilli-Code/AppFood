@@ -14,6 +14,7 @@ import location from "@/assets/icons/location.png";
 import logout from "@/assets/icons/logout.png";
 import message from "@/assets/icons/message.png";
 import minus from "@/assets/icons/minus.png";
+import pacakage from "@/assets/icons/package.png";
 import pencil from "@/assets/icons/pencil.png";
 import person from "@/assets/icons/person.png";
 import phone from "@/assets/icons/phone.png";
@@ -170,6 +171,7 @@ export const toppings = [
 export const images = {
     fondohome,
     locationMap,
+    pacakage,
     callMapa,
     drivericon,
     message,

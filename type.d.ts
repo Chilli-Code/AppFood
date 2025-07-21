@@ -100,6 +100,7 @@ interface CreateUserParams {
     email: string;
     password: string;
     name: string;
+    role: 'cliente' | 'repartidor'; 
 }
 
 interface SignInParams {

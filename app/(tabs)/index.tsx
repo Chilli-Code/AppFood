@@ -8,6 +8,9 @@ import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import WelcomeModal from '@/components/WelcomeModal';
+
+import { router } from 'expo-router';
+
 export default function Index() {
   const { user } = useAuthStore();
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
@@ -17,14 +20,21 @@ export default function Index() {
 
 
 
-  // Cuando el usuario exista, mostramos la modal automáticamente
+  // 👇 Redirigir si es repartidor
   React.useEffect(() => {
-    if (user) {
+    if (user?.role === "repartidor") {
+      router.replace("/(repartidor)/delivery");
+    }
+  }, [user]);
+
+  // Mostrar modal solo si es cliente
+  React.useEffect(() => {
+    if (user?.role === "cliente") {
       setShowWelcomeModal(true);
     }
   }, [user]);
-  const handleCloseModal = () => setShowWelcomeModal(false);
 
+  const handleCloseModal = () => setShowWelcomeModal(false);
 
   return (
     <SafeAreaView className="flex-1 bg-white">

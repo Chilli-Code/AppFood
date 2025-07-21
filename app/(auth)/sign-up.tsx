@@ -8,18 +8,32 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Alert, Image, Modal, Text, TouchableOpacity, View } from "react-native";
 
-const SignUp = () => {
-          const { t } = useTranslation();
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [showModal, setShowModal] = useState(false); // Estado para controlar la modal
 
+const SignUp = () => {
+  const { t } = useTranslation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+ type Role = "cliente" | "repartidor";
+
+const [form, setForm] = useState<{
+  name: string;
+  email: string;
+  password: string;
+  role: Role;
+}>({
+  name: "",
+  email: "",
+  password: "",
+  role: "cliente",
+});
+
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la modal
+  
   const setUser = useAuthStore((state) => state.setUser);
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
   const submit = async () => {
-    const { name, email, password } = form;
+   const { name, email, password, role } = form;
+
 
     if (!name || !email || !password)
       return Alert.alert("Error", "Please enter valid data.");
@@ -28,9 +42,7 @@ const SignUp = () => {
 
     try {
       
-      await createUser({ name, email, password });
-
-
+      await createUser({ name, email, password, role });
       
       setShowModal(true);
     } catch (error: any) {
@@ -61,6 +73,19 @@ const SignUp = () => {
         label={t('lbemail')}
         keyboardType="email-address"
       />
+
+<View className="mt-4">
+        <Text className="text-base  font-medium mb-1">Seleccione rol</Text>
+  <Text className="text-base font-medium mb-2">{t("select_role")}</Text>
+  <TouchableOpacity onPress={() => setForm(prev => ({ ...prev, role: "cliente" }))}>
+    <Text className={form.role === "cliente" ? "text-primary" : "text-gray-100"}>Cliente</Text>
+  </TouchableOpacity>
+  <TouchableOpacity onPress={() => setForm(prev => ({ ...prev, role: "repartidor" }))}>
+    <Text className={form.role === "repartidor" ? "text-primary" : "text-gray-100"}>Repartidor</Text>
+  </TouchableOpacity>
+</View>
+
+
       <CustomInput
         placeholder={t('enter_password')}
         value={form.password}

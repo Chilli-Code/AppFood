@@ -5,6 +5,11 @@ import { initReactI18next } from 'react-i18next';
 export const resources = {
   en: {
     translation: {
+      // TABS
+      home:'Home',
+      cart:'Cart',
+      profileT:'Profile',
+
       //login
       create_explore: 'Crear una cuenta o iniciar sesión para explorar',
       get_started: 'Get Started now',
@@ -51,6 +56,7 @@ export const resources = {
       //Profile
       titleprofile: 'Profile',
       lblphone:'Phone number',
+      log_out:'log out',
       //edit profile
       titleeditinfo:'Edit personal data',
       bteditprofile:'Edit Profile',
@@ -65,11 +71,6 @@ export const resources = {
       locationactual:'Use current location',
       message_update_profile:'Success, profile updated',
 
-      
-      
-
-
-
 
 
       // Ajustes
@@ -82,8 +83,14 @@ export const resources = {
       other: 'OTHER',
       appearance:'Appearance',
       saveInfo: 'Save changes',
+      about_ticketis: "About Ticketis",
+      privacy_policy: "Privacy Policy",
+      terms_and_conditions: "Terms and Conditions",
+
+
+
       //Location Toast
-            location_permission_denied: 'Permission denied',
+        location_permission_denied: 'Permission denied',
       location_permission_error: 'Could not enable location',
       location_enabled: 'Location enabled',
       location_disabled: 'Location disabled',
@@ -116,6 +123,10 @@ export const resources = {
 
   es: {
     translation: {
+      //TABS
+      home:'Inicio',
+      cart:'Carrito',
+      profileT:'Perfil',
       //login
       create_explore: 'Cree una cuenta o inicie sesión para explorar',
       get_started: 'Empieza ahora',
@@ -150,9 +161,14 @@ export const resources = {
       other: 'OTROS',
       saveInfo: 'Guardar cambios',
       lblgender:'Genero',
+      about_ticketis: "Acerca de Ticketis",
+      privacy_policy: "Política de Privacidad",
+      terms_and_conditions: "Términos y Condiciones",
+
+
       // Location Toast
 
-            location_permission_denied: 'Permiso denegado',
+      location_permission_denied: 'Permiso denegado',
       location_permission_error: 'No se pudo activar la ubicación',
       location_enabled: 'Ubicación activada',
       location_disabled: 'Ubicación desactivada',
@@ -167,9 +183,10 @@ export const resources = {
       //Profile
       titleprofile: 'Perfil',
       lblphone:'Numero de telefono',
+      log_out:'Cerrar sesión',
       //edit Profile
       titleeditinfo:'Editar datos personales',
-      bteditprofile:'Edit Profile',
+      bteditprofile:'Editar Perfil',
       lbladdres1:'Dirección 1 (Casa)',
       lbladdres2:'Dirección 2 (Trabajo)',
       select_genderM:'Masculino',

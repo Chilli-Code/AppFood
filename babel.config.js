@@ -11,6 +11,7 @@ module.exports = function (api) {
     plugins: [["module-resolver", {
       root: ["./"],
       plugins: ['react-native-reanimated/plugin'],
+      
 
       alias: {
         "@": "./",

@@ -180,7 +180,7 @@ const { i18n, t } = useTranslation();
               quantity: quantity,
               customizations: [],
             });
-
+            console.log(addItem);
             Toast.show({
               type: 'success',
               text1: t('added_to_cart'),

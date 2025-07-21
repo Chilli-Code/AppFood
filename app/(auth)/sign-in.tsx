@@ -2,7 +2,6 @@ import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import { signIn } from "@/lib/appwrite";
 import useAuthStore from "@/store/auth.store";
-import * as Sentry from "@sentry/react-native";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next';
@@ -17,24 +16,38 @@ const SignIn = () => {
     const fetchAuthenticatedUser = useAuthStore((state) => state.fetchAuthenticatedUser);
 
 
-    const submit = async () => {
-        const { email, password } = form;
+const submit = async () => {
+  const { email, password } = form;
 
-        if (!email || !password) return Alert.alert('Error', 'Please enter valid email address');
+  if (!email || !password) return Alert.alert('Error', 'Please enter valid email address');
 
-        setIsSubmitting(true)
+  setIsSubmitting(true);
 
-        try {
-            await signIn({ email, password });
-            await fetchAuthenticatedUser();
-            router.replace("/");
-        } catch (error: any) {
-            Alert.alert('Error', error.message);
-            Sentry.captureEvent(error);
-        } finally {
-            setIsSubmitting(false);
-        }
+  try {
+    await signIn({ email, password });
+
+    const user = await fetchAuthenticatedUser();  // trae usuario con rol
+
+    if (!user) {
+      Alert.alert("Error", "No user found");
+      return;
     }
+
+    if (user.role === "repartidor") {
+      // Redirige a ruta exclusiva para repartidor
+      router.replace("/(repartidor)/(tabs)/delivery"); 
+    } else {
+      // Redirige a ruta principal para clientes u otros roles
+      router.replace("/"); 
+    }
+
+  } catch (error: any) {
+    Alert.alert('Error', error.message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
     return (
         <View className="gap-10 bg-white rounded-lg p-5 mt-5">

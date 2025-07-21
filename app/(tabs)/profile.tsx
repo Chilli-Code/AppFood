@@ -88,7 +88,7 @@ const editinfo = () => {
             </View>
             <View className="flex-1">
               <Text className="text-gray-100 text-left font-[400]">{t('lblphone')}</Text>
-              <Text className="text-dark-100 font-semibold text-left mt-1">+1 555 123 4567</Text>
+              <Text className="text-dark-100 font-semibold text-left mt-1">{user?.phone?.trim() ? user.phone : 'No agregado'}</Text>
             </View>
           </View>
           <View className="mb-5 rounded-lg p-3 flex-row items-center">
@@ -136,7 +136,7 @@ const editinfo = () => {
             style={{ backgroundColor: 'rgba(241, 65, 65, 0.05)', borderRadius: 100 }}
           >
             <Image source={images.logout} className="w-6 h-6 mx-1" />
-            <Text className="text-center text-error font-semibold">Cerrar sesión</Text>
+            <Text className="text-center text-error font-semibold">{t('log_out')}</Text>
           </TouchableOpacity>
         </View>
 
