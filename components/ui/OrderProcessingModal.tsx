@@ -61,7 +61,7 @@ export default function OrderProcessingModal({ visible, onClose }: OrderProcessi
           {t('your_order_is_processing')}
         </Text>
         <Text className="text-base text-gray-700 text-center">
-          {t('please_wait')}
+          {t('check_your_notifications')}
         </Text>
 
         <Pressable

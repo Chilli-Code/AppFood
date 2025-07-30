@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FoodAPP",
-    "slug": "FoodAPP",
+    "name": "Chilly Food",
+    "slug": "chilly-food",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -30,9 +30,6 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
       ],

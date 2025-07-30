@@ -2,6 +2,7 @@ import CustomHeader from '@/components/CustomHeader';
 import { getOrdersByUser } from "@/lib/appwrite";
 import useAuthStore from "@/store/auth.store";
 import { useRouter } from "expo-router";
+import LottieView from 'lottie-react-native';
 import React, { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react-native";
@@ -47,9 +48,23 @@ export default function OrdersList() {
 
   if (orders.length === 0) {
     return (
-      <View className="flex-1 justify-center items-center px-10">
-        <Text>{t('no_orders_yet') || "No tienes pedidos aún."}</Text>
-      </View>
+<SafeAreaView className="flex-1 px-4 py-5 items-center justify-center bg-white">
+  <CustomHeader title={t('notifications') || "Pedidos"} rightIcon={false} />
+
+  <View className="flex-1 justify-center items-center w-full">
+    <LottieView
+      source={require('@/assets/animations/emmpy_notification.json')}
+      autoPlay
+      loop
+      style={{ width: 250, height: 250 }}
+    />
+
+    <Text className="text-center text-dark-100 font-semibold text-2xl mt-4">
+      {t('no_orders_yet')}
+    </Text>
+  </View>
+</SafeAreaView>
+
     );
   }
 

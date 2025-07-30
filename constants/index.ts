@@ -76,31 +76,36 @@ export const CATEGORIES = [
 ];
 
 export const offers = [
-    {
-        id: 1,
-        title: "SUMMER COMBO",
-        image: burgerOne,
-        color: "#D33B0D",
-    },
-    {
-        id: 2,
-        title: "BURGER BASH",
-        image: burgerTwo,
-        color: "#DF5A0C",
-    },
-    {
-        id: 3,
-        title: "PIZZA PARTY",
-        image: pizzaOne,
-        color: "#084137",
-    },
-    {
-        id: 4,
-        title: "BURRITO DELIGHT",
-        image: buritto,
-        color: "#EB920C",
-    },
+  {
+    id: 1,
+    title: "SUMMER COMBO",
+    image: burgerOne,
+    color: "#D33B0D",
+    categoryId: "687710cf00061a280c43", // Burgers
+  },
+  {
+    id: 2,
+    title: "BURGER BASH",
+    image: burgerTwo,
+    color: "#DF5A0C",
+    categoryId: "687710cf00061a280c43", // Burgers
+  },
+  {
+    id: 3,
+    title: "PIZZA PARTY",
+    image: pizzaOne,
+    color: "#084137",
+    categoryId: "687710cf001ae445bb86", // Pizzas
+  },
+  {
+    id: 4,
+    title: "BURRITO DELIGHT",
+    image: buritto,
+    color: "#EB920C",
+    categoryId: "687710cf002fb1348770", // Burritos
+  },
 ];
+
 
 export const sides = [
     {

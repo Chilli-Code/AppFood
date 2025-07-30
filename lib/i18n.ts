@@ -43,6 +43,10 @@ export const resources = {
       added_to_cart: "1 has been added",
       titledetail: 'Details',
 
+      //Notificaciones
+      order_deleted:'Order deleted',
+      no_orders_yet:'No orders yet',
+
       // Cart
       your_cart: 'Your Cart',
       payment_summary: 'Payment Summary',
@@ -52,6 +56,9 @@ export const resources = {
       delivery_fee: 'Delivery Fee',
       discount: 'Discount',
       total: 'Total',
+      your_cart_is_empty:'Your cart is empty',
+      your_order_is_processing:'Your order is processing',
+      check_your_notifications:'Check your notifications',
 
       //Profile
       titleprofile: 'Profile',
@@ -131,6 +138,8 @@ export const resources = {
       create_explore: 'Cree una cuenta o inicie sesión para explorar',
       get_started: 'Empieza ahora',
 
+
+
       //inicio
       summer_combo: "Combo de Verano",
       burger_bash: "Festival de Hamburguesas",
@@ -167,7 +176,6 @@ export const resources = {
 
 
       // Location Toast
-
       location_permission_denied: 'Permiso denegado',
       location_permission_error: 'No se pudo activar la ubicación',
       location_enabled: 'Ubicación activada',
@@ -179,6 +187,12 @@ export const resources = {
       add_cart:'Añadir al carrito',
       freedeliver:'Envío gratuito',
       titledetail: 'Detalles',
+
+      //Notificaciones
+      order_deleted:'Pedido eliminado',
+      no_orders_yet:'Todavía no hay pedidos',
+
+
 
       //Profile
       titleprofile: 'Perfil',
@@ -201,9 +215,6 @@ export const resources = {
 
 
 
-
-
-
       //Cart
       payment_summary: 'Resumen de pagos',
       order_now: 'Pedir ahora',
@@ -213,6 +224,10 @@ export const resources = {
       total: 'Total',
       cartitem: 'Cesta Artículo',
        added_to_cart: "Se ha añadido 1",
+      your_cart_is_empty:'Su carrito está vacío',
+      your_order_is_processing:'Su pedido está en proceso',
+      check_your_notifications:'Revise sus notificaciones',
+
 
       // Pantallas / flujos generales
       add_to_cart: 'Añadir al carrito',

@@ -13,11 +13,9 @@ import { router } from 'expo-router';
 
 export default function Index() {
   const { user } = useAuthStore();
+  const { t } = useTranslation();
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   // console.log("USER", JSON.stringify(user, null, 2));
-    const { t } = useTranslation();
-
-
 
 
   // 👇 Redirigir si es repartidor
@@ -42,11 +40,8 @@ export default function Index() {
         data={offers}
         renderItem={({ item, index }) => {
           const isEven = index % 2 === 0;
-const titleKey = item.title.toLowerCase().replace(/\s+/g, "_"); // ej: SUMMER COMBO → summer_combo
-const translatedTitle = t(titleKey);
-
-        
-
+          const titleKey = item.title.toLowerCase().replace(/\s+/g, "_"); // ej: SUMMER COMBO → summer_combo
+          const translatedTitle = t(titleKey);
 
           return (
             <View>
@@ -54,6 +49,26 @@ const translatedTitle = t(titleKey);
                 className={cn("offer-card", isEven ? 'flex-row-reverse' : 'flex-row')}
                 style={{ backgroundColor: item.color }}
                 android_ripple={{ color: "#fffff22" }}
+                onPress={() => {
+                  const categoryIdMap: Record<string, string> = {
+                    "BURGER BASH": "687710cf00061a280c43",    // Burgers
+                    "PIZZA PARTY": "687710cf001ae445bb86",     // Pizzas
+                    "BURRITO DELIGHT": "687710cf002fb1348770", // Burritos
+                    "SUMMER COMBO": "687710d10006032a5b67",    // Bowls
+                  };
+
+                  const id = categoryIdMap[item.title];
+                  if (!id) return;
+
+                  router.push({
+                    pathname: "/screens/menu-category",
+                    params: {
+                      categoryId: id,
+                      name: item.title,
+                    },
+                  });
+                }}
+
               >
                 {({ pressed }) => (
                   <Fragment>

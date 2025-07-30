@@ -52,7 +52,7 @@ export default function DeleteOrderModal({ visible, onClose }: DeleteOrderModalP
           />
         </View>
         <Text className="text-xl font-bold mt-2 mb-1 text-center">{t('order_deleted')}</Text>
-        <Text className="text-base text-gray-700 text-center">{t('order_deleted_message')}</Text>
+        
 
         <Pressable
           onPress={() => bottomSheetModalRef.current?.dismiss()}
